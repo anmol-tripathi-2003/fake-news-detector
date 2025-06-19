@@ -1,7 +1,9 @@
 
 import streamlit as st
 import pickle
-
+import os
+print("Current directory:", os.getcwd())
+print("Files in directory:", os.listdir())
 # Load model and vectorizer
 model = pickle.load(open('model.pkl', 'rb'))
 vectorizer = pickle.load(open('vectorizer.pkl', 'rb'))
