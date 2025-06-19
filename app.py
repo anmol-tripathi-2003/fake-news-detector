@@ -1,16 +1,24 @@
-
 import streamlit as st
 import pickle
 import os
-print("Current directory:", os.getcwd())
-print("Files in directory:", os.listdir())
-# Load model and vectorizer
-model = pickle.load(open('model.pkl', 'rb'))
-vectorizer = pickle.load(open('vectorizer.pkl', 'rb'))
 
 st.title("📰 Fake News Detector")
-st.subheader("Enter a news article below to predict whether it's real or fake.")
 
+# Debug section
+st.write("Current working directory:", os.getcwd())
+st.write("Files:", os.listdir())
+
+# Try to load files
+try:
+    model = pickle.load(open('model.pkl', 'rb'))
+    vectorizer = pickle.load(open('vectorizer.pkl', 'rb'))
+    st.success("✅ Model and vectorizer loaded successfully!")
+except Exception as e:
+    st.error(f"❌ Error loading files: {e}")
+    st.stop()
+
+# UI
+st.subheader("Enter a news article below to predict whether it's real or fake.")
 text = st.text_area("Paste the news article text here", height=300)
 
 if st.button("Predict"):
